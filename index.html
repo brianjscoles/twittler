@@ -34,15 +34,23 @@ var streams = {
     <script>
       var index = 0;
 
+      function postTweet(source,index){
+        var tweet = streams.home[index];
+            var dateString = '[' + tweet.created_at.getHours() + 
+                              ":" + tweet.created_at.getMinutes() + 
+                              ":" + (tweet.created_at.getSeconds()<10 ? '0'+tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
+                              ']'
+            var $tweet = $('<div></div>');
+            $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($('body'));
+      }
+
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
 
         while(index < streams.home.length){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('[' + tweet.created_at + '] @' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          postTweet(streams.home,index);
           index += 1;
         } 
       });
@@ -51,12 +59,8 @@ var streams = {
 
         setInterval(function(){
           while(index < streams.home.length){
-            var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text('[' + tweet.created_at + '] @' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($('body'));
+            postTweet(streams.home,index)
             index += 1;
-            
           }
           //var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
           //$status.appendTo($('body'));
