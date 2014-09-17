@@ -41,7 +41,7 @@ var streams = {
         while(index < streams.home.length){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text('[' + tweet.created_at + '] @' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
           index += 1;
         } 
@@ -53,13 +53,13 @@ var streams = {
           while(index < streams.home.length){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.text('[' + tweet.created_at + '] @' + tweet.user + ': ' + tweet.message);
             $tweet.appendTo($('body'));
             index += 1;
             
           }
-          var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
-          $status.appendTo($('body'));
+          //var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
+          //$status.appendTo($('body'));
         },1500);
 
 
