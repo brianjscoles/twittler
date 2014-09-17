@@ -35,12 +35,11 @@ var streams = {
       
 
       var index = 0;
+      
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(typeof(user)==="null") user = "anon";
-      $(document).ready(function(){
-        $('body').append("<div>Logged in as " + user + ".</div> <br><br>");
-      });
-
+      $('body').append("<div>Logged in as " + user + ".</div> <br><br>");
+      
 
       function postTweet(source,index){
         var tweet = streams.home[index];
@@ -58,12 +57,10 @@ var streams = {
 
 
       //populates document with initial batch of tweets.
-      $(document).ready(function(){
-        while(index < streams.home.length){
-          postTweet(streams.home,index);
-          index += 1;
-        } 
-      });
+      while(index < streams.home.length){
+        postTweet(streams.home,index);
+        index += 1;
+      };
 
       //every 1500 milliseconds: check for new tweet(s)       
       setInterval(function(){
