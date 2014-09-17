@@ -1,3 +1,29 @@
+<!--
+
+var users = ["mracus", "sharksforcheap", "shawndrost", "calhoun"]
+
+var streams = { 
+  users :
+    { mracus : 
+        ["tweet1", "tweet 7"],
+      shawndrost :
+        ["tweet2", "tweet3", "tweet71"],
+      sharksforcheap :
+        ["tweet4","tweet5"],
+      calhoun :
+        ["tweet6","tweet9"]
+    }
+  home :
+    ["tweet1","tweet2","tweet3", .... "tweet500"]
+  }
+
+
+-->
+
+
+
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,22 +32,40 @@
   </head>
   <body>
     <script>
+      var index = 0;
 
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
+        while(index < streams.home.length){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
-          index -= 1;
-        }
-
+          index += 1;
+        } 
       });
+
+      //every 800 milliseconds: check for new tweet(s)       
+
+        setInterval(function(){
+          while(index < streams.home.length){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($('body'));
+            index += 1;
+            
+          }
+          var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
+          $status.appendTo($('body'));
+        },1500);
+
+
 
     </script>
   </body>
 </html>
+
+
