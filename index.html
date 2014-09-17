@@ -32,39 +32,49 @@ var streams = {
   </head>
   <body>
     <script>
+      
+
       var index = 0;
+      var user = prompt("Welcome to Twittler! Please enter your username.","name");
+      if(typeof(user)==="null") user = "anon";
+      $(document).ready(function(){
+        $('body').append("<div>Logged in as " + user + ".</div> <br><br>");
+      });
+
 
       function postTweet(source,index){
         var tweet = streams.home[index];
-            var dateString = '[' + tweet.created_at.getHours() + 
-                              ":" + tweet.created_at.getMinutes() + 
-                              ":" + (tweet.created_at.getSeconds()<10 ? '0'+tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
-                              ']'
-            var $tweet = $('<div></div>');
-            $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($('body'));
+            
+        //creates a formatted date string e.g. [14:42:07]
+        var dateString = '[' +  tweet.created_at.getHours() + 
+                         ":" + (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) +
+                         ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
+                         ']'
+
+        var $tweet = $('<div></div>');
+        $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
+        $tweet.appendTo($('body'));
       }
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
 
+      //populates document with initial batch of tweets.
+      $(document).ready(function(){
         while(index < streams.home.length){
           postTweet(streams.home,index);
           index += 1;
         } 
       });
 
-      //every 800 milliseconds: check for new tweet(s)       
-
-        setInterval(function(){
-          while(index < streams.home.length){
-            postTweet(streams.home,index)
-            index += 1;
-          }
-          //var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
-          //$status.appendTo($('body'));
-        },1500);
+      //every 1500 milliseconds: check for new tweet(s)       
+      setInterval(function(){
+        //add check here: only continue if "auto" is set to "on."
+        while(index < streams.home.length){
+          postTweet(streams.home,index)
+          index += 1;
+        }
+        //var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
+        //$status.appendTo($('body'));
+      },1500);
 
 
 
