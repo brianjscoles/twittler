@@ -37,9 +37,12 @@ var streams = {
       var index = 0;
       
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
-      if(typeof(user)==="null") user = "anon";
-      $('body').append("<div>Logged in as " + user + ".</div> <br><br>");
-      
+      if(user===null) user = "anon";
+      streams.users[user] = [];
+      users.push(user);
+      $('body').append("<div>Logged in as " + user + ".</div>");
+      $('body').append("Following: " + users.toString() + "<br><br>");
+
 
       function postTweet(source,index){
         var tweet = streams.home[index];
