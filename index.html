@@ -29,14 +29,44 @@ var streams = {
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="twittler.css"> -->   
+    
+    <style type="text/css">
+      .header {
+        background-color: aliceblue;
+        font-family: arial;
+        border: 3px solid royalblue;
+        border-radius: 8px;
+      }
+      .tweetspace {
+        background-color: #CCFFCC;
+        font-family: times;
+        border: 3px solid lightgreen;
+        border-radius: 8px;
+      }
+      .button {
+        display: block;
+        height: 18px;
+        width: 100px;
+        background: lightblue;
+        border: 2px solid blue;
+        color: blue;
+        text-align: center;
+      }
+
+    </style>
+    
   </head>
   <body>
     <div class="header"> TWITTLER </div>
+    <br>
+    <div class="button">Design Shack</div>
+    
     <br><br>
+    
     <div class="tweetspace"></div>
     <script>
       
-
       var index = 0;
       
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
@@ -45,6 +75,7 @@ var streams = {
       users.push(user);
       $('.header').append("<div>Logged in as " + user + ".</div>");
       $('.header').append("Following: " + users.toString() + "<br><br>");
+      
 
 
       function postTweet(source,index){
