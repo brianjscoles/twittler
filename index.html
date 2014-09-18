@@ -42,6 +42,8 @@ var streams = {
     <script>
 
       function postTweets(){
+          var elem = document.getElementById('tweetspace');
+          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-400;                  //should replace this 400 with a dynamic reference or lookup to the height.
         while(index < streams.home.length){
           var tweet = streams.home[index];
               
@@ -54,8 +56,7 @@ var streams = {
           var $tweet = $('<div></div>');
           $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($('.tweetspace'));
-          var elem = document.getElementById('tweetspace');
-          elem.scrollTop = elem.scrollHeight;
+          if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
           index += 1;
         }
       }      
