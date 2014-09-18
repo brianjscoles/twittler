@@ -3,7 +3,8 @@
     font-family: arial;
     border: 3px solid blue;
     border-radius: 8px;
-    width: 900px;
+    width: 650px;
+    height: 180px;
     padding: 5px;
   }
 
@@ -20,7 +21,7 @@ h1 {
     border: 3px solid lightgreen;
     border-radius: 8px;
     height: 400px;
-    width: 800px;
+    width: 650px;
     overflow: auto;
     padding: 5px;
   }
