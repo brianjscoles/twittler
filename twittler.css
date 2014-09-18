@@ -9,14 +9,17 @@
         font-family: times;
         border: 3px solid lightgreen;
         border-radius: 8px;
+        height: 200px;
+        overflow: auto;
       }
+
       button {
         display: inline-block;
         height: 18px;
         width: 130px;
-        background: lightblue;
+        background: grey;
         border: 2px solid black;
-        color: blue;
+        color: black;
         text-align: center;
         margin-left: 8px;
         border-radius: 5px;
@@ -25,11 +28,5 @@
       .active {
         color: white;
         background: blue;
-        border
-      }
-
-      .inactive {
-        border: 2px solid black;
-        color: black;
-        background: grey;
+        border: 2px solid blue;
       }

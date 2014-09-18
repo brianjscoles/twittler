@@ -38,21 +38,26 @@ var streams = {
     
     <br><br>
     
-    <div class="tweetspace"></div>
+    <div class="tweetspace" id="tweetspace"></div>
     <script>
 
-      function postTweet(source,index){
-        var tweet = streams.home[index];
-            
-        //creates a formatted date string e.g. [14:42:07]
-        var dateString = '[' +  tweet.created_at.getHours() + 
-                         ":" + (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) +
-                         ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
-                         ']';
+      function postTweets(){
+        while(index < streams.home.length){
+          var tweet = streams.home[index];
+              
+          //creates a formatted date string e.g. [14:42:07]
+          var dateString = '[' +  tweet.created_at.getHours() + 
+                           ":" + (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) +
+                           ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
+                           ']';
 
-        var $tweet = $('<div></div>');
-        $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
-        $tweet.appendTo($('.tweetspace'));
+          var $tweet = $('<div></div>');
+          $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
+          $tweet.appendTo($('.tweetspace'));
+          var elem = document.getElementById('tweetspace');
+          elem.scrollTop = elem.scrollHeight;
+          index += 1;
+        }
       }      
 
       //setup
@@ -62,36 +67,28 @@ var streams = {
       streams.users[user] = [];
       var $header = $('.header');
       $header.append("<div>Logged in as " + user + ".</div> <br> <div>Following: </div>");
+      $header.append("<button class='active UsrButton'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $header.append("<button>" + users[i] + "</button>");
+        $header.append("<button class='UsrButton'> @" + users[i] + "</button>");
       }
-      $header.append("<button>" + user + "</button>");
-      $header.append("<button class='active'>Show All</button>");
-
-      //watch for click.  makes the clicked button the only active one.
-      $(':button').on('click',function(){
-        $(':button').removeClass('active');
-        $(this).addClass('active');
-      });
+      $header.append("<button class='UsrButton'> @" + user + "</button>");
       
 
+      //watch for click.  makes the clicked button the only active one.
+      $('.UsrButton').on('click',function(){
+        $('.UsrButton').removeClass('active');
+        $(this).addClass('active');
 
+        //get the "userID" from the clicked button.
+        //if "userID"=="all", display all
+        //else: hide all tweets that don't match that userID.  show all that do.
+      });
+      
+      postTweets();
 
-      //populates document with initial batch of tweets.
-      while(index < streams.home.length){
-        postTweet(streams.home,index);
-        index += 1;
-      }
-
-      //check for new tweet(s) every interval      
       setInterval(function(){
         //add check here: only continue if "auto" is set to "on."
-        while(index < streams.home.length){
-          postTweet(streams.home,index);
-          index += 1;
-        }
-        //var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
-        //$status.appendTo($('body'));
+        postTweets();    
       },1500);
 
 
