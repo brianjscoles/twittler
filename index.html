@@ -33,7 +33,9 @@ var streams = {
 
   </head>
   <body>
-    <div class="header"> TWITTLER </div>
+    <div class="header"> 
+      <h1> TWITTLER </h1>
+    </div>
     <br>
     
     <br>
@@ -45,7 +47,7 @@ var streams = {
     //must check which user is active before pushing out new tweets.
       function postTweets(){
           var elem = document.getElementById('tweetspace');
-          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-400;                  //should replace this "400" with a dynamic reference or lookup to the height.
+          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-elem.clientHeight;      
         while(index < streams.home.length){
           var tweet = streams.home[index];
               
@@ -56,7 +58,9 @@ var streams = {
                            ']';
 
           var $tweet = $("<div class='tweet "+tweet.user+"'></div>");
+
           $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
+          console.log($tweet.text());
           $tweet.appendTo($('.tweetspace'));
           if(displaySetting != tweet.user && displaySetting != "all") $('.tweet:last').hide();
           if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
@@ -71,13 +75,13 @@ var streams = {
       if(user===null) user = "anon";
       streams.users[user] = [];
       var $header = $('.header');
-      $header.append("<div>Logged in as " + user + ".</div> <br> <div>Showing tweets from: </div>");
+      $header.append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
       $header.append("<button class='active UsrButton'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
         $header.append("<button class='UsrButton'>@" + users[i] + "</button>");
       }
       $header.append("<button class='UsrButton'>@" + user + "</button>");
-      $header.append("<br><br><input class='draft' type='text'/> <button class='TwtButton'>Tweet</button>")
+      $header.append("<br><br><input class='draft' type='text'/> <button class='TwtButton'>Post New Tweet</button>")
       
 
       //watch for click.  make the clicked button the only active one. update which tweets are displayed or hidden.
@@ -111,7 +115,7 @@ var streams = {
       setInterval(function(){
         //add check here: only continue if "auto" is set to "on."
         postTweets();    
-      },1500);
+      },500);
 
     </script>
   </body>

@@ -1,36 +1,44 @@
- .header {
-        background-color: aliceblue;
-        font-family: arial;
-        border: 3px solid blue;
-        border-radius: 8px;
-        width: 900px;
-        padding: 5px;
-      }
-      .tweetspace {
-        background-color: #CCFFCC;
-        font-family: times;
-        border: 3px solid lightgreen;
-        border-radius: 8px;
-        height: 400px;
-        width: 800px;
-        overflow: auto;
-        padding: 5px;
-      }
+.header {
+    background-color: aliceblue;
+    font-family: arial;
+    border: 3px solid blue;
+    border-radius: 8px;
+    width: 900px;
+    padding: 5px;
+  }
 
-      .UsrButton {
-        display: inline-block;
-        height: 18px;
-        width: 130px;
-        background: grey;
-        border: 2px solid black;
-        color: black;
-        text-align: center;
-        margin-left: 8px;
-        border-radius: 5px;
-      }
+h1 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 5px;
+    color: black;
+}
+  
+.tweetspace {
+    background-color: #CCFFCC;
+    font-family: times;
+    border: 3px solid lightgreen;
+    border-radius: 8px;
+    height: 400px;
+    width: 800px;
+    overflow: auto;
+    padding: 5px;
+  }
 
-      .active {
-        color: white;
-        background: blue;
-        border: 2px solid blue;
-      }
+.UsrButton {
+    display: inline-block;
+    height: 18px;
+    width: 130px;
+    background: grey;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    margin-left: 8px;
+    border-radius: 5px;
+  }
+
+.active {
+    color: white;
+    background: blue;
+    border: 2px solid blue;
+  }
