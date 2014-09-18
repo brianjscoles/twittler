@@ -65,11 +65,14 @@ var streams = {
       $header.append("<div>Logged in as " + user + ".</div>");
       $header.append("<div>Following: </div>");
       for (var i = 0; i < users.length; i++) {
-        var button = "<div class='active button'>" + users[i] + "</div>";
+        var button = "<button class='active'>" + users[i] + "</button>";
         $header.append(button);
       };
 
-
+      //watch for click
+      $(':button').on('click',function(){
+        this.classList.contains('active') ? $(this).removeClass('active') : $(this).addClass('active');
+      })
       
 
 
