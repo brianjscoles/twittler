@@ -36,7 +36,7 @@ var streams = {
     <div class="header"> TWITTLER </div>
     <br>
     
-    <br><br>
+    <br>
     
     <div class="tweetspace" id="tweetspace"></div>
     <script>
@@ -76,10 +76,11 @@ var streams = {
       for (var i = 0; i < users.length; i++) {
         $header.append("<button class='UsrButton'>@" + users[i] + "</button>");
       }
-      $header.append("<button class='UsrButton mracus'>@" + user + "</button>");
+      $header.append("<button class='UsrButton'>@" + user + "</button>");
+      $header.append("<br><br><input class='draft' type='text'/> <button class='TwtButton'>Tweet</button>")
       
 
-      //watch for click.  makes the clicked button the only active one.
+      //watch for click.  make the clicked button the only active one. update which tweets are displayed or hidden.
       $('.UsrButton').on('click',function(){
         $('.UsrButton').removeClass('active');
         $(this).addClass('active');
@@ -92,13 +93,21 @@ var streams = {
           $('.tweet').hide();
           $('.'+displaySetting).show();
         }
-        //get the "userID" from the clicked button.
-        //if "userID"=="all", display all
-        //else: hide all tweets that don't match that userID.  show all that do.
       });
-      
-      postTweets();
 
+      $('.TwtButton').on('click',function(){
+        var tweet = {}
+        tweet.user = user;
+        tweet.message = $('input').val();
+        tweet.created_at = new Date();
+        streams.users[user].push(tweet);
+        streams.home.push(tweet);
+        console.log(tweet);
+        $('input').val('');
+      })
+      
+
+      postTweets();
       setInterval(function(){
         //add check here: only continue if "auto" is set to "on."
         postTweets();    

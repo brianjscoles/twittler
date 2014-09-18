@@ -4,6 +4,7 @@
         border: 3px solid blue;
         border-radius: 8px;
         width: 900px;
+        padding: 5px;
       }
       .tweetspace {
         background-color: #CCFFCC;
@@ -13,9 +14,10 @@
         height: 400px;
         width: 800px;
         overflow: auto;
+        padding: 5px;
       }
 
-      button {
+      .UsrButton {
         display: inline-block;
         height: 18px;
         width: 130px;
