@@ -41,9 +41,11 @@ var streams = {
     <div class="tweetspace" id="tweetspace"></div>
     <script>
 
+
+    //must check which user is active before pushing out new tweets.
       function postTweets(){
           var elem = document.getElementById('tweetspace');
-          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-400;                  //should replace this 400 with a dynamic reference or lookup to the height.
+          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-400;                  //should replace this "400" with a dynamic reference or lookup to the height.
         while(index < streams.home.length){
           var tweet = streams.home[index];
               
@@ -53,9 +55,10 @@ var streams = {
                            ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
                            ']';
 
-          var $tweet = $('<div></div>');
+          var $tweet = $("<div class='tweet "+tweet.user+"'></div>");
           $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($('.tweetspace'));
+          if(displaySetting != tweet.user && displaySetting != "all") $('.tweet:last').hide();
           if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
           index += 1;
         }
@@ -64,22 +67,31 @@ var streams = {
       //setup
       var index = 0;  
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
+      var displaySetting = "all";
       if(user===null) user = "anon";
       streams.users[user] = [];
       var $header = $('.header');
-      $header.append("<div>Logged in as " + user + ".</div> <br> <div>Following: </div>");
+      $header.append("<div>Logged in as " + user + ".</div> <br> <div>Showing tweets from: </div>");
       $header.append("<button class='active UsrButton'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $header.append("<button class='UsrButton'> @" + users[i] + "</button>");
+        $header.append("<button class='UsrButton'>@" + users[i] + "</button>");
       }
-      $header.append("<button class='UsrButton'> @" + user + "</button>");
+      $header.append("<button class='UsrButton mracus'>@" + user + "</button>");
       
 
       //watch for click.  makes the clicked button the only active one.
       $('.UsrButton').on('click',function(){
         $('.UsrButton').removeClass('active');
         $(this).addClass('active');
-
+        displaySetting = $(this).text().slice(1);
+        console.log(displaySetting);
+        if(displaySetting=="how All"){
+          displaySetting = "all";
+          $('.tweet').show();
+        } else {
+          $('.tweet').hide();
+          $('.'+displaySetting).show();
+        }
         //get the "userID" from the clicked button.
         //if "userID"=="all", display all
         //else: hide all tweets that don't match that userID.  show all that do.
@@ -91,8 +103,6 @@ var streams = {
         //add check here: only continue if "auto" is set to "on."
         postTweets();    
       },1500);
-
-
 
     </script>
   </body>
