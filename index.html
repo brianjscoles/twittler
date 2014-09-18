@@ -48,7 +48,7 @@ var streams = {
         var dateString = '[' +  tweet.created_at.getHours() + 
                          ":" + (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) +
                          ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
-                         ']'
+                         ']';
 
         var $tweet = $('<div></div>');
         $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
@@ -60,19 +60,19 @@ var streams = {
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(user===null) user = "anon";
       streams.users[user] = [];
-      users.push(user);
       var $header = $('.header');
-      $header.append("<div>Logged in as " + user + ".</div>");
-      $header.append("<div>Following: </div>");
+      $header.append("<div>Logged in as " + user + ".</div> <br> <div>Following: </div>");
       for (var i = 0; i < users.length; i++) {
-        var button = "<button class='active'>" + users[i] + "</button>";
-        $header.append(button);
-      };
+        $header.append("<button>" + users[i] + "</button>");
+      }
+      $header.append("<button>" + user + "</button>");
+      $header.append("<button class='active'>Show All</button>");
 
-      //watch for click
+      //watch for click.  makes the clicked button the only active one.
       $(':button').on('click',function(){
-        this.classList.contains('active') ? $(this).removeClass('active') : $(this).addClass('active');
-      })
+        $(':button').removeClass('active');
+        $(this).addClass('active');
+      });
       
 
 
@@ -81,13 +81,13 @@ var streams = {
       while(index < streams.home.length){
         postTweet(streams.home,index);
         index += 1;
-      };
+      }
 
-      //every 1500 milliseconds: check for new tweet(s)       
+      //check for new tweet(s) every interval      
       setInterval(function(){
         //add check here: only continue if "auto" is set to "on."
         while(index < streams.home.length){
-          postTweet(streams.home,index)
+          postTweet(streams.home,index);
           index += 1;
         }
         //var $status = $('<div>' + (index) + ' tweets printed. stream contains ' + streams.home.length + ' tweets.</div>');
