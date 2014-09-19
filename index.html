@@ -63,7 +63,7 @@ var streams = {
           $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
           console.log($tweet.text());
           $tweet.appendTo($('.tweetspace'));
-          if(displaySetting != tweet.user && displaySetting != "all") $('.tweet:last').hide();
+          if(displaySetting != tweet.user && displaySetting != "ShowAll") $('.tweet:last').hide();
           if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
           index += 1;
         }
@@ -72,14 +72,14 @@ var streams = {
       //setup
       var index = 0;  
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
-      var displaySetting = "all";
+      var displaySetting = "ShowAll";
       if(user===null) user = "anon";
       streams.users[user] = [];
       var $header = $('.header');
       $header.append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
-      $header.append("<button class='active UsrButton'>Show All</button>");
+      $header.append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $header.append("<button class='UsrButton'>@" + users[i] + "</button>");
+        $header.append("<button class='UsrButton' id='"+users[i]+"'>@" + users[i] + "</button>");
       }
       $header.append("<button class='UsrButton'>@" + user + "</button>");
       $header.append("<br><br><input class='draft' type='text'/> <button class='TwtButton'>Post New Tweet</button>")
@@ -89,10 +89,9 @@ var streams = {
       $('.UsrButton').on('click',function(){
         $('.UsrButton').removeClass('active');
         $(this).addClass('active');
-        displaySetting = $(this).text().slice(1);
+        displaySetting = $(this).attr('id');
         console.log(displaySetting);
-        if(displaySetting=="how All"){
-          displaySetting = "all";
+        if(displaySetting=="ShowAll"){
           $('.tweet').show();
         } else {
           $('.tweet').hide();
