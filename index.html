@@ -36,16 +36,17 @@ var streams = {
     <div class="header"> 
       <img src="wow.jpg" alt="wow" height=160px width=110px align=right> 
       <h1> TWITTLER </h1>
+      <div id="loggedInAs"></div>
+      <div id="buttons"></div>
+      <br>
+      <div id="tweetEntry">
+        <input class='draft' type='text'/> <button class='TwtButton'>Post New Tweet</button>
     </div>
-    <br>
-    
-    <br>
-    
+    <br><br>
     <div class="tweetspace" id="tweetspace"></div>
     <script>
 
 
-    //must check which user is active before pushing out new tweets.
       function postTweets(){
           var elem = document.getElementById('tweetspace');
           var scrolledToBottom = elem.scrollTop===elem.scrollHeight-elem.clientHeight;      
@@ -59,9 +60,8 @@ var streams = {
                            ']';
 
           var $tweet = $("<div class='tweet "+tweet.user+"'></div>");
+          $tweet.text(dateString + ' <b>@' + tweet.user + '</b>: ' + tweet.message);
 
-          $tweet.text(dateString + ' @' + tweet.user + ': ' + tweet.message);
-          console.log($tweet.text());
           $tweet.appendTo($('.tweetspace'));
           if(displaySetting != tweet.user && displaySetting != "ShowAll") $('.tweet:last').hide();
           if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
@@ -76,13 +76,12 @@ var streams = {
       if(user===null) user = "anon";
       streams.users[user] = [];
       var $header = $('.header');
-      $header.append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
-      $header.append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
+      $('#loggedInAs').append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
+      $('#buttons').append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $header.append("<button class='UsrButton' id='"+users[i]+"'>@" + users[i] + "</button>");
+        $('#buttons').append("<button class='UsrButton' id='"+users[i]+"'>@" + users[i] + "</button>");
       }
-      $header.append("<button class='UsrButton'>@" + user + "</button>");
-      $header.append("<br><br><input class='draft' type='text'/> <button class='TwtButton'>Post New Tweet</button>")
+      $('#buttons').append("<button class='UsrButton'>@" + user + "</button>");
       
 
       //watch for click.  make the clicked button the only active one. update which tweets are displayed or hidden.
@@ -90,7 +89,6 @@ var streams = {
         $('.UsrButton').removeClass('active');
         $(this).addClass('active');
         displaySetting = $(this).attr('id');
-        console.log(displaySetting);
         if(displaySetting=="ShowAll"){
           $('.tweet').show();
         } else {
@@ -99,6 +97,7 @@ var streams = {
         }
       });
 
+      //on click, post new tweet from input box.
       $('.TwtButton').on('click',function(){
         var tweet = {}
         tweet.user = user;
