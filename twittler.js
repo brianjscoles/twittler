@@ -49,7 +49,7 @@ function postTweets(){
 
 
 
-      //watch for click.  make the clicked button the only active one. update which tweets are displayed or hidden.
+      //on click, make the clicked UsrButton the only active one. update which tweets are displayed or hidden.
       $('.UsrButton').on('click',function(){
         $('.UsrButton').removeClass('active');
         $('.UsrButton').addClass('inactive');
