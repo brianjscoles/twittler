@@ -1,5 +1,5 @@
 .header {
-    background-color: aliceblue;
+    background-color: #99CCFF;
     font-family: arial;
     border: 3px solid blue;
     border-radius: 8px;
@@ -10,8 +10,8 @@
 
 h1 {
     font-weight: bold;
-    font-size: 1.5em;
-    margin: 5px;
+    font-size: 25px;
+    margin: 3px;
     color: black;
 }
   
@@ -34,18 +34,20 @@ button{
     margin: 4px;
     border-radius: 5px;
     color: blue;
+    font-weight: bold;
   }
 
 .active {
     color: white;
     background: blue;
-    border: 2px solid blue;
+    border: 1px solid white;
   }
 
 .inactive {
     background: grey;
-    border: 2px solid black;
+    border: 1px solid black;
     color: black;
+    font-weight: normal;
 }
 
 body {
