@@ -4,7 +4,7 @@
     border: 3px solid blue;
     border-radius: 8px;
     width: 650px;
-    height: 180px;
+    height: 220px;
     padding: 5px;
   }
 
@@ -26,16 +26,14 @@ h1 {
     padding: 5px;
   }
 
-.UsrButton {
+button{
     display: inline-block;
     height: 18px;
     width: 130px;
-    background: grey;
-    border: 2px solid black;
-    color: black;
     text-align: center;
-    margin-left: 8px;
+    margin: 4px;
     border-radius: 5px;
+    color: blue;
   }
 
 .active {
@@ -43,6 +41,12 @@ h1 {
     background: blue;
     border: 2px solid blue;
   }
+
+.inactive {
+    background: grey;
+    border: 2px solid black;
+    color: black;
+}
 
 body {
     background-color: #E0FFFF;

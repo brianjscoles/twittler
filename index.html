@@ -1,4 +1,4 @@
-<!--
+<!-- Example of how the data structure works:
 
 var users = ["mracus", "sharksforcheap", "shawndrost", "calhoun"]
 
@@ -37,86 +37,13 @@ var streams = {
       <img src="wow.jpg" alt="wow" height=160px width=110px align=right> 
       <h1> TWITTLER </h1>
       <div id="loggedInAs"></div>
-      <div id="buttons"></div>
-      <br>
+      <div id="buttons"> </div>
       <div id="tweetEntry">
         <input class='draft' type='text'/> <button class='TwtButton'>Post New Tweet</button>
     </div>
     <br><br>
     <div class="tweetspace" id="tweetspace"></div>
-    <script>
-
-
-      function postTweets(){
-          var elem = document.getElementById('tweetspace');
-          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-elem.clientHeight;      
-        while(index < streams.home.length){
-          var tweet = streams.home[index];
-              
-          //creates a formatted date string e.g. [14:42:07]
-          var dateString = '[' +  tweet.created_at.getHours() + 
-                           ":" + (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) +
-                           ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
-                           ']';
-
-          var $tweet = $("<div class='tweet "+tweet.user+"'></div>");
-          $tweet.text(dateString + ' <b>@' + tweet.user + '</b>: ' + tweet.message);
-
-          $tweet.appendTo($('.tweetspace'));
-          if(displaySetting != tweet.user && displaySetting != "ShowAll") $('.tweet:last').hide();
-          if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
-          index += 1;
-        }
-      }      
-
-      //setup
-      var index = 0;  
-      var user = prompt("Welcome to Twittler! Please enter your username.","name");
-      var displaySetting = "ShowAll";
-      if(user===null) user = "anon";
-      streams.users[user] = [];
-      var $header = $('.header');
-      $('#loggedInAs').append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
-      $('#buttons').append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
-      for (var i = 0; i < users.length; i++) {
-        $('#buttons').append("<button class='UsrButton' id='"+users[i]+"'>@" + users[i] + "</button>");
-      }
-      $('#buttons').append("<button class='UsrButton'>@" + user + "</button>");
-      
-
-      //watch for click.  make the clicked button the only active one. update which tweets are displayed or hidden.
-      $('.UsrButton').on('click',function(){
-        $('.UsrButton').removeClass('active');
-        $(this).addClass('active');
-        displaySetting = $(this).attr('id');
-        if(displaySetting=="ShowAll"){
-          $('.tweet').show();
-        } else {
-          $('.tweet').hide();
-          $('.'+displaySetting).show();
-        }
-      });
-
-      //on click, post new tweet from input box.
-      $('.TwtButton').on('click',function(){
-        var tweet = {}
-        tweet.user = user;
-        tweet.message = $('input').val();
-        tweet.created_at = new Date();
-        streams.users[user].push(tweet);
-        streams.home.push(tweet);
-        console.log(tweet);
-        $('input').val('');
-      })
-      
-
-      postTweets();
-      setInterval(function(){
-        //add check here: only continue if "auto" is set to "on."
-        postTweets();    
-      },500);
-
-    </script>
+    <script src="twittler.js"></script>
   </body>
 </html>
 
