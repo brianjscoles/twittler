@@ -13,7 +13,8 @@ function postTweets(){
                            ']';
 
           //generates tweet HTML object and appends to DOM
-          var $tweet = $("<div class='tweet "+tweet.user+"'>"+ dateString + ' <b>@' + tweet.user + '</b>: ' + tweet.message + "</div>");
+          var $tweet = $("<div class='tweet "+tweet.user+"'></div>");
+          $tweet.html(dateString + ' <b>@' + tweet.user + ': </b>' + tweet.message);
           $tweet.appendTo($('.tweetspace'));
 
           //auto-scrolls to new bottom of tweet window, IF user was currently viewing the bottom.

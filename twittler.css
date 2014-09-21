@@ -53,3 +53,8 @@ button{
 body {
     background-color: #E0FFFF;
 } 
+
+.draft {
+    width: 123px;
+    margin-left:5px;
+}

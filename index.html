@@ -1,43 +1,16 @@
-<!-- Example of how the data structure works:
-
-var users = ["mracus", "sharksforcheap", "shawndrost", "calhoun"]
-
-var streams = { 
-  users :
-    { mracus : 
-        ["tweet1", "tweet 7"],
-      shawndrost :
-        ["tweet2", "tweet3", "tweet71"],
-      sharksforcheap :
-        ["tweet4","tweet5"],
-      calhoun :
-        ["tweet6","tweet9"]
-    }
-  home :
-    ["tweet1","tweet2","tweet3", .... "tweet500"]
-  }
-
-
--->
-
-
-
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" type="text/css" href="twittler.css">  
-
   </head>
   <body>
     <div class="header"> 
       <img src="wow.jpg" alt="wow" height=200px width=140px align=right> 
       <h1> TWITTLER </h1>
       <div id="loggedInAs"></div>
-      <div id="buttons"> </div>
+      <div id="buttons"></div>
       <div id="tweetEntry">
         <input class='draft' type='text'/> <button class='TwtButton'>Post New Tweet</button>
     </div>
