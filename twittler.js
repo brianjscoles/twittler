@@ -1,6 +1,6 @@
-function postTweets(){
-          var elem = document.getElementById('tweetspace');
-          var scrolledToBottom = elem.scrollTop===elem.scrollHeight-elem.clientHeight;      
+      function postTweets(){
+        var elem = document.getElementById('tweetspace');
+        var scrolledToBottom = elem.scrollTop===elem.scrollHeight-elem.clientHeight;      
         
         //iterates for all tweets not already added to DOM.
         while(index < streams.home.length){
@@ -22,7 +22,9 @@ function postTweets(){
           if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
           index += 1;
         }
-      }      
+      }  
+
+
 
       //setup global variables and user name
       var index = 0; 
@@ -47,7 +49,6 @@ function postTweets(){
         //add check here: only continue if "auto" is set to "on."
         if($('#AutoRefreshToggle').hasClass('active')) postTweets();    
       },500);
-
 
 
       //on click, make the clicked UsrButton the only active one. update which tweets are displayed or hidden.
@@ -85,7 +86,8 @@ function postTweets(){
           button.addClass('inactive');
         } else {
           button.removeClass('inactive');
-          button.addClass('active')
+          button.addClass('active');
+
         }
       });
 
