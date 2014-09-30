@@ -133,6 +133,7 @@ a:active {
 .FTauthor{
     font-weight: bold;
     font-size: 18px;
+    font-family: times;
 }
 
 .FTtimestamp{
