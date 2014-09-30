@@ -72,9 +72,9 @@
       $('#loggedInAs').append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
       $('#buttons').append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $('#buttons').append("<button class='UsrButton inactive' id='"+users[i]+"'>@" + users[i] + "</button>");
+        $('#buttons').append("<button class='UsrButton inactive' id='"+users[i]+"'>" + users[i].handle + "</button>");
       }
-      $('#buttons').append("<button class='UsrButton inactive' id='"+user+"'>@" + user + "</button><br><br>");
+      $('#buttons').append("<button class='UsrButton inactive' id='"+user+"'>" + userdata[user].handle + "</button><br><br>");
       $('#buttons').append("<button class='active' id='AutoRefreshToggle'>Auto Refresh</button>");
       $('#buttons').append("<button id='ManuallyUpdateTweets'>Get new tweets</button>");
 

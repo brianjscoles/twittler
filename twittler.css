@@ -18,13 +18,12 @@ h1 {
 }
   
 .tweetspace {
-    background-color: #CCFFCC;
+    background-color: white;
     font-family: times;
-    border: 3px solid lightgreen;
-    border-radius: 8px;
-    height: 382px;
+    border: 2px solid black;
+    border-radius: 3px;
     width: 900px;
-    overflow: auto;
+    height: 1800px;
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
