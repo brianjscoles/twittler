@@ -19,7 +19,7 @@
           var $tweet = $("<div class='tweet' data-author="+tweet.user+"></div>");
           $tweet.html("<div class='FTheader'> \
                         <span class='FTauthor'>"+userdata[tweet.user].name+"</span> \
-                        <a href='#' title='See more tweets from this user' class='FThandle'> "+userdata[tweet.user].handle+"</a> \
+                        <a href='#' title='See all tweets from this user' class='FThandle'> "+userdata[tweet.user].handle+"</a> \
                         <span> - </span> \
                         <span class='FTtimestamp' data-timestamp=' "+dateString+" '>"+  moment(tweet.created_at).fromNow()+"</span> \
                       </div> \
@@ -92,11 +92,11 @@
       $('#loggedInAs').append("<div>Logged in as '" + userdata[username].name + "'.</div> <br> <div>Showing tweets from: </div>");
       $('#buttons').append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $('#buttons').append("<button class='UsrButton inactive' id='"+users[i]+"'>" + userdata[users[i]].handle + "</button>");
+        $('#buttons').append("<button class='UsrButton' id='"+users[i]+"'>" + userdata[users[i]].handle + "</button>");
       }
-      $('#buttons').append("<button class='UsrButton inactive' id='"+username+"'>" + userdata[username].handle + "</button><br><br>");
-      $('#buttons').append("<button class='active' id='AutoRefreshToggle'>Auto Refresh</button>");
-      $('#buttons').append("<button id='ManuallyUpdateTweets'>Get new tweets</button>");
+      $('#buttons').append("<button class='UsrButton' id='"+username+"'>" + userdata[username].handle + "</button><br><br>");
+      $('#buttons').append("<button class='active' id='AutoRefreshToggle'>Auto Refresh: ON</button>");
+      $('#buttons').append("<button class='pushButton' id='ManuallyUpdateTweets'>Get new tweets</button>");
 
 
 
@@ -124,8 +124,6 @@
       //on click, make the clicked UsrButton the only active one. update which tweets are displayed or hidden.
       $('.UsrButton').on('click',function(){
         $('.UsrButton').removeClass('active');
-        $('.UsrButton').addClass('inactive');
-        $(this).removeClass('inactive');
         $(this).addClass('active');
         displaySetting = $(this).attr('id');
         if(displaySetting=="ShowAll"){
@@ -137,7 +135,7 @@
       });
 
       //on click, post new tweet from input box.
-      $('.TwtButton').on('click',function(){
+      $('#TwtButton').on('click',function(){
         submitUserTweet();
       })
       
@@ -156,15 +154,10 @@
       
       //on click, toggle the "Auto Refresh" option.
       $('#AutoRefreshToggle').on('click',function(){
-        var button = $(this);
-        if(button.hasClass('active')){
-          button.removeClass('active');
-          button.addClass('inactive');
-        } else {
-          button.removeClass('inactive');
-          button.addClass('active');
-
-        }
+        var $this = $(this);
+        if ($this.hasClass('active')) $this.text("Auto Refresh: OFF");
+        else $this.text("Auto Refresh: ON");
+        $(this).toggleClass('active');
       });
 
       //on click, check for new tweets.
