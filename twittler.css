@@ -3,9 +3,11 @@
     font-family: arial;
     border: 3px solid blue;
     border-radius: 8px;
-    width: 600px;
+    width: 900px;
     height: 220px;
     padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 h1 {
@@ -20,10 +22,12 @@ h1 {
     font-family: times;
     border: 3px solid lightgreen;
     border-radius: 8px;
-    height: 400px;
-    width: 600px;
+    height: 382px;
+    width: 650px;
     overflow: auto;
     padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 button{
@@ -63,10 +67,14 @@ body {
     position: relative;
     height: 90px;
     width: 450px;
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;    
     border: 1px solid black;
     border-radius: 5px;
     background-color: white;
+
 }
 
 .FTheader {
