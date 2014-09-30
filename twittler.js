@@ -17,7 +17,7 @@
           $tweet.html("<div class='FTheader'> \
                         <span class='FTauthor'>"+userdata[tweet.user].name+"</span> \
                         <span class='FThandle'> "+userdata[tweet.user].handle+"</span> \
-                        <span class='FTtimestamp'>"+  dateString+"</span> \
+                        <span class='FTtimestamp'>"+  moment(tweet.created_at).fromNow()+"</span> \
                       </div> \
                       <div class ='FTtext'>" + tweet.message + "</div> \
                       <img class ='FTpic' src="+userdata[tweet.user].image+">");
