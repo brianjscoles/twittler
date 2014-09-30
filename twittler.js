@@ -7,17 +7,20 @@
           var tweet = streams.home[index];
               
           //creates a formatted date string e.g. [14:42:07]
-          var dateString = '[' +  tweet.created_at.getHours() + 
-                           ":" + (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) +
-                           ":" + (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds()) + 
-                           ']';
+
+          var dateString = tweet.created_at.getFullYear() + "-" + 
+                              ((tweet.created_at.getMonth()+1 <10) ? '0' + (tweet.created_at.getMonth()+1) : (tweet.created_at.getMonth()+1)) + "-" +
+                              (tweet.created_at.getUTCDate() <10 ? '0' + tweet.created_at.getUTCDate() : tweet.created_at.getUTCDate()) + "-" +
+                              (tweet.created_at.getHours() <10 ? '0' + tweet.created_at.getHours() : tweet.created_at.getHours()) + "-" +
+                              (tweet.created_at.getMinutes()<10 ? '0' + tweet.created_at.getMinutes() : tweet.created_at.getMinutes()) + "-" +
+                              (tweet.created_at.getSeconds()<10 ? '0' + tweet.created_at.getSeconds() : tweet.created_at.getSeconds());
 
           //generates tweet HTML object and appends to DOM
           var $tweet = $("<div class='tweet' data-author="+tweet.user+"></div>");
           $tweet.html("<div class='FTheader'> \
                         <span class='FTauthor'>"+userdata[tweet.user].name+"</span> \
-                        <span class='FThandle'> "+userdata[tweet.user].handle+"</span> \
-                        <span class='FTtimestamp'>"+  moment(tweet.created_at).fromNow()+"</span> \
+                        <span class='FThandle'> "+userdata[tweet.user].handle+" - </span> \
+                        <span class='FTtimestamp' data-timestamp=' "+dateString+" '>"+  moment(tweet.created_at).fromNow()+"</span> \
                       </div> \
                       <div class ='FTtext'>" + tweet.message + "</div> \
                       <img class ='FTpic' src="+userdata[tweet.user].image+">");
@@ -99,6 +102,14 @@
         if($('#AutoRefreshToggle').hasClass('active')) postTweets();    
       },500);
 
+      
+      //check and update relative time stamps every 15 seconds.
+      setInterval(function(){
+        $('.FTtimestamp').each(function( i ) {
+          $(this).text(moment(this.dataset.timestamp,"YYYY-MM-DD-HH-mm-ss").fromNow());
+        });
+      },9000)
+      
 
       //on click, make the clicked UsrButton the only active one. update which tweets are displayed or hidden.
       $('.UsrButton').on('click',function(){
