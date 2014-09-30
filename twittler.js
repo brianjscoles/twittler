@@ -1,6 +1,6 @@
       function postTweets(){
         var elem = document.getElementById('tweetspace');
-        var scrolledToBottom = elem.scrollTop===elem.scrollHeight-elem.clientHeight;      
+        var scrolledToBottom = elem.scrollTop===0;      
         
         //iterates for all tweets not already added to DOM.
         while(index < streams.home.length){
@@ -21,13 +21,13 @@
                       </div> \
                       <div class ='FTtext'>" + tweet.message + "</div> \
                       <img class ='FTpic' src="+userdata[tweet.user].image+">");
-          $tweet.appendTo($('.tweetspace'));
+          $tweet.prependTo($('.tweetspace'));
 
 
 
-          //auto-scrolls to new bottom of tweet window, IF user was currently viewing the bottom.
+          //auto-scrolls to top of tweet window, IF user was currently viewing the top.
           if(displaySetting != tweet.user && displaySetting != "ShowAll") $('.tweet:last').hide();
-          if(scrolledToBottom) elem.scrollTop = elem.scrollHeight;
+          if(scrolledToBottom) elem.scrollTop = 0;
           index += 1;
         }
       }  
