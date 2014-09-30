@@ -61,8 +61,8 @@ body {
 
 .fancytweet {
     position: relative;
-    height: 120px;
-    width: 475px;
+    height: 90px;
+    width: 400px;
     margin: 5px;
     border: 1px solid black;
     border-radius: 5px;
@@ -79,8 +79,8 @@ body {
     position: absolute;
     height:70px; 
     width:70px; 
-    margin-top: 15px;
-    margin-left: 10px;
+    margin-top: 8px;
+    margin-left: 5px;
     border: 2px solid gray;
     border-radius: 3px;
 }
@@ -89,11 +89,21 @@ body {
     position: absolute;
     left: 90px;
     top: 35px;
-    font-size: 14px;
+    font-size: 16px;
+    font-family: arial;
 }
 
 .FTtag{
     color: gray;
-    font-size: 13px;
+    font-size: 15px;
+}
+
+.FTauthor{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.FTtimestamp{
+    font-size: 16px;
 }
 

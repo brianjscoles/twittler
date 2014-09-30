@@ -13,9 +13,17 @@
                            ']';
 
           //generates tweet HTML object and appends to DOM
-          var $tweet = $("<div class='tweet "+tweet.user+"'></div>");
-          $tweet.html(dateString + ' <b>@' + tweet.user + ': </b>' + tweet.message);
+          var $tweet = $("<div class='fancytweet'></div>");
+          $tweet.html("<div class='FTheader'> \
+                        <span class='FTauthor'>"+tweet.user+"</span> \
+                        <span class='FTtag'> @"+tweet.user+"</span> \
+                        <span class='FTtimestamp'>"+  dateString+"</span> \
+                      </div> \
+                      <div class ='FTtext'>" + tweet.message + "</div> \
+                      <img class ='FTpic' src="+userdata[tweet.user].image+">");
           $tweet.appendTo($('.tweetspace'));
+
+
 
           //auto-scrolls to new bottom of tweet window, IF user was currently viewing the bottom.
           if(displaySetting != tweet.user && displaySetting != "ShowAll") $('.tweet:last').hide();
@@ -29,6 +37,28 @@
       //setup global variables and user name
       var index = 0; 
       var displaySetting = "ShowAll"; 
+      var userdata = {
+        mracus : { 
+          name: "Marcus X",
+          image: "marcus.jpeg",
+          handle: "@mracus"
+        },
+        shawndrost : {
+          name: "Shawn Drost",
+          image: "shawn.png",
+          handle: "@shawndrost"
+        },
+        douglascalhoun : {
+          name: "Douglas Calhoun",
+          image: "douglas.JPG",
+          handle: "@douglascalhoun"
+        },
+        sharksforcheap : {
+          name: "Anthony Philips",
+          image: "sharks.jpeg",
+          handle: "@sharksforcheap"
+        }
+      };
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(user===null) user = "anon";
       streams.users[user] = [];
@@ -95,6 +125,9 @@
       $('#ManuallyUpdateTweets').on('click',function(){
         postTweets();
       });
+
+      var $newTweet = 
+      $(document.body).append("testing!");
 
 
 
