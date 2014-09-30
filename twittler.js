@@ -19,7 +19,8 @@
           var $tweet = $("<div class='tweet' data-author="+tweet.user+"></div>");
           $tweet.html("<div class='FTheader'> \
                         <span class='FTauthor'>"+userdata[tweet.user].name+"</span> \
-                        <span class='FThandle'> "+userdata[tweet.user].handle+" - </span> \
+                        <a href='#' title='See more tweets from this user' class='FThandle'> "+userdata[tweet.user].handle+"</a> \
+                        <span> - </span> \
                         <span class='FTtimestamp' data-timestamp=' "+dateString+" '>"+  moment(tweet.created_at).fromNow()+"</span> \
                       </div> \
                       <div class ='FTtext'>" + tweet.message + "</div> \
@@ -75,6 +76,8 @@
           handle: "@sharksforcheap"
         }
       };
+      
+
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(user===null) user = "anon";
       var username = user.split(' ').join('').toLowerCase();
@@ -95,8 +98,15 @@
       $('#buttons').append("<button class='active' id='AutoRefreshToggle'>Auto Refresh</button>");
       $('#buttons').append("<button id='ManuallyUpdateTweets'>Get new tweets</button>");
 
-      //check for new tweets, and set up a recurring interval to automatically retrieve more tweets every half second.
-      postTweets();
+
+
+      
+      /* 
+       * Event handlers and auto-recurring functions
+       */
+
+
+      //automatically retrieve and post more tweets every half second.
       setInterval(function(){
         //add check here: only continue if "auto" is set to "on."
         if($('#AutoRefreshToggle').hasClass('active')) postTweets();    
@@ -135,6 +145,12 @@
         if(e.keyCode==13){
           submitUserTweet();
         };
+      });
+
+      //if the handle in a tweet is clicked: display only that user's tweets.
+      $('body').on('click','.FThandle',function(){
+        var author = $(this).closest('.tweet').data("author");
+        $('#'+author).trigger('click');
       });
 
       
