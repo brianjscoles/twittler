@@ -1,6 +1,6 @@
       function postTweets(){
         var elem = document.getElementById('tweetspace');
-        var scrolledToBottom = elem.scrollTop===0;      
+        var scrolledToTop = elem.scrollTop===0;      
         
         //iterates for all tweets not already added to DOM.
         while(index < streams.home.length){
@@ -28,12 +28,22 @@
           //auto-scrolls to top of tweet window, IF user was currently viewing the top.
           if(displaySetting != tweet.user && displaySetting != "ShowAll"){
             $('.tweet:first').hide();
-            console.log("display setting is "+ displaySetting+". showing tweet from "+ tweet.user);
           }
-          if(scrolledToBottom) elem.scrollTop = 0;
+          if(scrolledToTop) elem.scrollTop = 0;
+          else elem.scrollTop = elem.scrollTop + 97;
           index += 1;
         }
       }  
+
+      function submitUserTweet(){
+        var tweet = {};
+        tweet.user = username;
+        tweet.message = $('#draft').val();
+        tweet.created_at = new Date();
+        streams.users[username].push(tweet);
+        streams.home.push(tweet);
+        $('#draft').val('');
+      }
 
 
 
@@ -107,14 +117,15 @@
 
       //on click, post new tweet from input box.
       $('.TwtButton').on('click',function(){
-        var tweet = {};
-        tweet.user = username;
-        tweet.message = $('input').val();
-        tweet.created_at = new Date();
-        streams.users[username].push(tweet);
-        streams.home.push(tweet);
-        $('input').val('');
+        submitUserTweet();
       })
+      
+      $('#draft').bind('keypress', function(e) {
+        if(e.keyCode==13){
+          submitUserTweet();
+        };
+      });
+
       
       //on click, toggle the "Auto Refresh" option.
       $('#AutoRefreshToggle').on('click',function(){

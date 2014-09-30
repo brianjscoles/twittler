@@ -1,13 +1,14 @@
 .header {
     background-color: #99CCFF;
     font-family: arial;
-    border: 3px solid blue;
-    border-radius: 8px;
-    width: 900px;
-    height: 220px;
+    border: 2px solid blue;
+    border-radius: 3px;
+    width: 1000px;
+    height: 200px;
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 8px;
   }
 
 h1 {
@@ -16,17 +17,30 @@ h1 {
     margin: 3px;
     color: black;
 }
+
+textarea {
+    height: 36px;
+    width: 250px;
+    position: relative;
+    margin-left: 350px;
+}
+
+.TwtButton {
+    position: relative;
+    top: -18px;
+}
   
 .tweetspace {
     background-color: white;
     font-family: times;
     border: 2px solid black;
     border-radius: 3px;
-    width: 900px;
-    height: 1800px;
     padding: 5px;
+    width: 1000px;
+    height: 500px;
     margin-left: auto;
     margin-right: auto;
+    overflow: auto;
   }
 
 button{
@@ -72,8 +86,9 @@ body {
     margin-right: auto;    
     border: 1px solid black;
     border-radius: 5px;
-    background: -moz-linear-gradient(top,  #FFFFFF,  #DDDDE0);
-    background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDE0));
+    background: -moz-linear-gradient(top,  #FFFFFF,  #E3F1FA);
+    background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#E3F1FA));
+
 
 }
 
@@ -99,6 +114,7 @@ body {
     top: 35px;
     font-size: 16px;
     font-family: arial;
+    word-wrap: break-word;
 }
 
 .FThandle{
