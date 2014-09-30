@@ -13,7 +13,7 @@
                            ']';
 
           //generates tweet HTML object and appends to DOM
-          var $tweet = $("<div class='fancytweet'></div>");
+          var $tweet = $("<div class='tweet' data-author="+tweet.user+"></div>");
           $tweet.html("<div class='FTheader'> \
                         <span class='FTauthor'>"+userdata[tweet.user].name+"</span> \
                         <span class='FThandle'> "+userdata[tweet.user].handle+"</span> \
@@ -74,7 +74,7 @@
       for (var i = 0; i < users.length; i++) {
         $('#buttons').append("<button class='UsrButton inactive' id='"+users[i]+"'>@" + users[i] + "</button>");
       }
-      $('#buttons').append("<button class='UsrButton inactive'>@" + user + "</button><br><br>");
+      $('#buttons').append("<button class='UsrButton inactive' id='"+user+"'>@" + user + "</button><br><br>");
       $('#buttons').append("<button class='active' id='AutoRefreshToggle'>Auto Refresh</button>");
       $('#buttons').append("<button id='ManuallyUpdateTweets'>Get new tweets</button>");
 
@@ -97,7 +97,7 @@
           $('.tweet').show();
         } else {
           $('.tweet').hide();
-          $('.'+displaySetting).show();
+          $('[data-author="'+displaySetting+'"]').show();
         }
       });
 
@@ -105,12 +105,10 @@
       $('.TwtButton').on('click',function(){
         var tweet = {};
         tweet.user = user;
-        console.log("posting tweet from username "+user);
         tweet.message = $('input').val();
         tweet.created_at = new Date();
         streams.users[user].push(tweet);
         streams.home.push(tweet);
-        console.log(tweet);
         $('input').val('');
       })
       
