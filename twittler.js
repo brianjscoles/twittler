@@ -126,8 +126,5 @@
         postTweets();
       });
 
-      var $newTweet = 
-      $(document.body).append("testing!");
-
 
 
