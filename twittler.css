@@ -58,3 +58,42 @@ body {
     width: 123px;
     margin-left:5px;
 }
+
+.fancytweet {
+    position: relative;
+    height: 120px;
+    width: 475px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.FTheader {
+    position: absolute; 
+    top: 10px; 
+    left: 90px;
+}
+
+.FTpic{
+    position: absolute;
+    height:70px; 
+    width:70px; 
+    margin-top: 15px;
+    margin-left: 10px;
+    border: 2px solid gray;
+    border-radius: 3px;
+}
+
+.FTtext{
+    position: absolute;
+    left: 90px;
+    top: 35px;
+    font-size: 14px;
+}
+
+.FTtag{
+    color: gray;
+    font-size: 13px;
+}
+
