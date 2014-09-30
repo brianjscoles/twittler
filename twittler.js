@@ -26,7 +26,10 @@
 
 
           //auto-scrolls to top of tweet window, IF user was currently viewing the top.
-          if(displaySetting != tweet.user && displaySetting != "ShowAll") $('.tweet:last').hide();
+          if(displaySetting != tweet.user && displaySetting != "ShowAll"){
+            $('.tweet:first').hide();
+            console.log("display setting is "+ displaySetting+". showing tweet from "+ tweet.user);
+          }
           if(scrolledToBottom) elem.scrollTop = 0;
           index += 1;
         }
@@ -61,20 +64,21 @@
       };
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(user===null) user = "anon";
-      streams.users[user] = [];
-      userdata[user] = {
+      var username = user.split(' ').join('').toLowerCase();
+      streams.users[username] = [];
+      userdata[username] = {
         name: user,
-        handle: "@"+(user.split(' ').join('').toLowerCase()),
+        handle: "@"+username,
         image: "ducky.jpg"
       };
 
       //add buttons and other session-specific DOM elements
-      $('#loggedInAs').append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
+      $('#loggedInAs').append("<div>Logged in as '" + userdata[username].name + "'.</div> <br> <div>Showing tweets from: </div>");
       $('#buttons').append("<button class='active UsrButton' id='ShowAll'>Show All</button>");
       for (var i = 0; i < users.length; i++) {
-        $('#buttons').append("<button class='UsrButton inactive' id='"+users[i]+"'>" + users[i].handle + "</button>");
+        $('#buttons').append("<button class='UsrButton inactive' id='"+users[i]+"'>" + userdata[users[i]].handle + "</button>");
       }
-      $('#buttons').append("<button class='UsrButton inactive' id='"+user+"'>" + userdata[user].handle + "</button><br><br>");
+      $('#buttons').append("<button class='UsrButton inactive' id='"+username+"'>" + userdata[username].handle + "</button><br><br>");
       $('#buttons').append("<button class='active' id='AutoRefreshToggle'>Auto Refresh</button>");
       $('#buttons').append("<button id='ManuallyUpdateTweets'>Get new tweets</button>");
 
@@ -104,10 +108,10 @@
       //on click, post new tweet from input box.
       $('.TwtButton').on('click',function(){
         var tweet = {};
-        tweet.user = user;
+        tweet.user = username;
         tweet.message = $('input').val();
         tweet.created_at = new Date();
-        streams.users[user].push(tweet);
+        streams.users[username].push(tweet);
         streams.home.push(tweet);
         $('input').val('');
       })
