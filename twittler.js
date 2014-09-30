@@ -1,3 +1,5 @@
+      
+      //checks data structure for unposted tweets and adds all of them to the DOM.
       function postTweets(){
         var elem = document.getElementById('tweetspace');
         var scrolledToTop = elem.scrollTop===0;      
@@ -39,6 +41,7 @@
         }
       }  
 
+      //pulls text from the input box and pushes it to data structure as a new tweet.
       function submitUserTweet(){
         var tweet = {};
         tweet.user = username;
@@ -51,7 +54,7 @@
 
 
 
-      //setup global variables and user name
+      //set up global variables
       var index = 0; 
       var displaySetting = "ShowAll"; 
       var userdata = {
@@ -77,7 +80,7 @@
         }
       };
       
-
+      //set up active user account based on input
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(user===null) user = "anon";
       var username = user.split(' ').join('').toLowerCase();
@@ -134,16 +137,16 @@
         }
       });
 
-      //on click, post new tweet from input box.
+      //on click or "enter" keypress, post new tweet from input box.
       $('#TwtButton').on('click',function(){
         submitUserTweet();
       })
-      
       $('#draft').bind('keypress', function(e) {
         if(e.keyCode==13){
           submitUserTweet();
         };
       });
+
 
       //if the handle in a tweet is clicked: display only that user's tweets.
       $('body').on('click','.FThandle',function(){
