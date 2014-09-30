@@ -15,8 +15,8 @@
           //generates tweet HTML object and appends to DOM
           var $tweet = $("<div class='fancytweet'></div>");
           $tweet.html("<div class='FTheader'> \
-                        <span class='FTauthor'>"+tweet.user+"</span> \
-                        <span class='FTtag'> @"+tweet.user+"</span> \
+                        <span class='FTauthor'>"+userdata[tweet.user].name+"</span> \
+                        <span class='FThandle'> "+userdata[tweet.user].handle+"</span> \
                         <span class='FTtimestamp'>"+  dateString+"</span> \
                       </div> \
                       <div class ='FTtext'>" + tweet.message + "</div> \
@@ -39,7 +39,7 @@
       var displaySetting = "ShowAll"; 
       var userdata = {
         mracus : { 
-          name: "Marcus X",
+          name: "Marcus Philips",
           image: "marcus.jpeg",
           handle: "@mracus"
         },
@@ -62,6 +62,11 @@
       var user = prompt("Welcome to Twittler! Please enter your username.","name");
       if(user===null) user = "anon";
       streams.users[user] = [];
+      userdata[user] = {
+        name: user,
+        handle: "@"+(user.split(' ').join('').toLowerCase()),
+        image: "ducky.jpg"
+      };
 
       //add buttons and other session-specific DOM elements
       $('#loggedInAs').append("<div>Logged in as '" + user + "'.</div> <br> <div>Showing tweets from: </div>");
@@ -98,8 +103,9 @@
 
       //on click, post new tweet from input box.
       $('.TwtButton').on('click',function(){
-        var tweet = {}
+        var tweet = {};
         tweet.user = user;
+        console.log("posting tweet from username "+user);
         tweet.message = $('input').val();
         tweet.created_at = new Date();
         streams.users[user].push(tweet);

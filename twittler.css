@@ -3,7 +3,7 @@
     font-family: arial;
     border: 3px solid blue;
     border-radius: 8px;
-    width: 80%;
+    width: 600px;
     height: 220px;
     padding: 5px;
   }
@@ -21,7 +21,7 @@ h1 {
     border: 3px solid lightgreen;
     border-radius: 8px;
     height: 400px;
-    width: 80%;
+    width: 600px;
     overflow: auto;
     padding: 5px;
   }
@@ -62,7 +62,7 @@ body {
 .fancytweet {
     position: relative;
     height: 90px;
-    width: 400px;
+    width: 450px;
     margin: 5px;
     border: 1px solid black;
     border-radius: 5px;
@@ -93,7 +93,7 @@ body {
     font-family: arial;
 }
 
-.FTtag{
+.FThandle{
     color: gray;
     font-size: 15px;
 }
